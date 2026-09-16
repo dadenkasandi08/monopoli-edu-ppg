@@ -1,4 +1,9 @@
 import { motion } from "framer-motion";
+import imgHistory from "../assets/history.png";
+import imgPetunjuk from "../assets/petunjuk.png";
+import imgStart from "../assets/start.png";
+import imgAbout from "../assets/about.png";
+import imgBankSoal from "../assets/bank_soal.png";
 
 function HomePage() {
   return (
@@ -23,7 +28,7 @@ function HomePage() {
           >
             {/* Diperbesar menjadi w-48 (HP) dan md:w-56 (Laptop) */}
             <img
-              src="/src/assets/history.png"
+              src={imgHistory}
               alt="History"
               className="w-48 md:w-56 h-auto"
             />
@@ -37,7 +42,7 @@ function HomePage() {
             className="drop-shadow-md hover:drop-shadow-xl"
           >
             <img
-              src="/src/assets/petunjuk.png"
+              src={imgPetunjuk}
               alt="Petunjuk"
               className="w-48 md:w-56 h-auto"
             />
@@ -55,7 +60,7 @@ function HomePage() {
           >
             {/* Tombol Utama jauh diperbesar menjadi w-64 (HP) dan md:w-80 (Laptop) */}
             <img
-              src="/src/assets/start.png"
+              src={imgStart}
               alt="New Game"
               className="w-96 md:w-80 h-auto"
             />
@@ -72,11 +77,7 @@ function HomePage() {
             className="drop-shadow-md hover:drop-shadow-xl"
           >
             {/* Diperbesar menjadi w-48 (HP) dan md:w-56 (Laptop) */}
-            <img
-              src="/src/assets/about.png"
-              alt="About"
-              className="w-48 md:w-56 h-auto"
-            />
+            <img src={imgAbout} alt="About" className="w-48 md:w-56 h-auto" />
           </motion.button>
 
           <motion.button
@@ -87,7 +88,7 @@ function HomePage() {
             className="drop-shadow-md hover:drop-shadow-xl"
           >
             <img
-              src="/src/assets/bank_soal.png"
+              src={imgBankSoal}
               alt="Bank soal"
               className="w-48 md:w-56 h-auto"
             />
