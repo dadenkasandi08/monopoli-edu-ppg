@@ -5,9 +5,14 @@ import imgStart from "../assets/start.png";
 import imgAbout from "../assets/about.png";
 import imgBankSoal from "../assets/bank_soal.png";
 
-function HomePage() {
+function HomePage({ onNavigate }) {
+  const handleNavigate = (page) => {
+    onNavigate(page);
+  };
+
   return (
-    <div className="min-h-screen bg-[url('/src/assets/background.png')] bg-black/20 bg-blend-overlay bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center p-4">
+    // <div className="min-h-screen bg-[url('/src/assets/background.png')] bg-black/20 bg-blend-overlay bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-stone-400 flex flex-col items-center justify-center p-4">
       {/* Judul Halaman */}
       <div className="text-center mb-12">
         <h1 className="text-7xl md:text-6xl font-extrabold text-white drop-shadow-xl mb-4">
@@ -25,6 +30,7 @@ function HomePage() {
             whileHover={{ scale: 1.6 }}
             whileTap={{ scale: 1.6 }}
             className="drop-shadow-md hover:drop-shadow-xl"
+            onClick={() => handleNavigate("history")}
           >
             {/* Diperbesar menjadi w-48 (HP) dan md:w-56 (Laptop) */}
             <img
@@ -40,6 +46,7 @@ function HomePage() {
             whileHover={{ scale: 1.6 }}
             whileTap={{ scale: 1.6 }}
             className="drop-shadow-md hover:drop-shadow-xl"
+            onClick={() => handleNavigate("manual")}
           >
             <img
               src={imgPetunjuk}
@@ -57,6 +64,7 @@ function HomePage() {
             whileHover={{ scale: 2.2 }}
             whileTap={{ scale: 1.95 }}
             className="drop-shadow-xl hover:drop-shadow-2xl"
+            onClick={() => handleNavigate("start")}
           >
             {/* Tombol Utama jauh diperbesar menjadi w-64 (HP) dan md:w-80 (Laptop) */}
             <img
@@ -75,6 +83,7 @@ function HomePage() {
             whileHover={{ scale: 1.6 }}
             whileTap={{ scale: 1.6 }}
             className="drop-shadow-md hover:drop-shadow-xl"
+            onClick={() => handleNavigate("about")}
           >
             {/* Diperbesar menjadi w-48 (HP) dan md:w-56 (Laptop) */}
             <img src={imgAbout} alt="About" className="w-48 md:w-56 h-auto" />
@@ -86,6 +95,7 @@ function HomePage() {
             whileHover={{ scale: 1.6 }}
             whileTap={{ scale: 1.6 }}
             className="drop-shadow-md hover:drop-shadow-xl"
+            onClick={() => handleNavigate("bank-soal")}
           >
             <img
               src={imgBankSoal}

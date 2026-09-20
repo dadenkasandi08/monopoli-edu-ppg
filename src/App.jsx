@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import AboutPage from "./pages/AboutPage";
 import BoardPage from "./pages/BoardPage";
@@ -8,25 +8,21 @@ import ManualPage from "./pages/ManualPage";
 import StartPage from "./pages/StartPage";
 import TambahSoalPage from "./pages/TambahSoalPage";
 
-function App() {
+export default function App() {
+  // State untuk melacak halaman mana yang sedang dibuka (home, start, history, board)
+  const [currentPage, setCurrentPage] = useState("home");
+
   return (
-    <div>
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/board" element={<BoardPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/history" element={<HistoryPage />} />
-          <Route path="/manual" element={<ManualPage />} />
-          <Route path="/start" element={<StartPage />} />
-          <Route path="/tambah-soal" element={<TambahSoalPage />} />
-        </Routes>
-      </main>
-      <footer>
-        <p>© 2023 Monopoli Edu</p>
-      </footer>
-    </div>
+    <>
+      {currentPage === "home" && <HomePage onNavigate={setCurrentPage} />}
+      {currentPage === "start" && <StartPage onNavigate={setCurrentPage} />}
+      {currentPage === "history" && <HistoryPage onNavigate={setCurrentPage} />}
+      {currentPage === "board" && <BoardPage onNavigate={setCurrentPage} />}
+      {currentPage === "about" && <AboutPage onNavigate={setCurrentPage} />}
+      {currentPage === "manual" && <ManualPage onNavigate={setCurrentPage} />}
+      {currentPage === "bank-soal" && (
+        <TambahSoalPage onNavigate={setCurrentPage} />
+      )}
+    </>
   );
 }
-
-export default App;
