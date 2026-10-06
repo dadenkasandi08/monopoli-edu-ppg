@@ -6,11 +6,11 @@ const defaultBoard = [
   { id: 0, type: 'corner', title: '🏁 START 🏁', desc: 'Mulai dari sini', theme: 'gray', bg: 'none' },
   { id: 1, type: 'topic', title: 'Danau Toba, Sumatera Utara', desc: 'Ambil Kartu Danau Toba', theme: 'green', bg: '/island/danauToba.png' },
   { id: 2, type: 'topic', title: 'Jam Gadang, Sumatera Barat', desc: 'Ambil Kartu Jam Gadang', theme: 'yellow', bg: '/island/jamGadang.png' },
-  { id: 3, type: 'corner', title: 'Pulau Natuna, Kepulauan Riau', desc: 'Ambil Kartu Pulau Natuna', theme: 'sky', bg: '/island/pulauNatuna.png' },
+  { id: 3, type: 'topic', title: 'Pulau Natuna, Kepulauan Riau', desc: 'Ambil Kartu Pulau Natuna', theme: 'sky', bg: '/island/pulauNatuna.png' },
   { id: 4, type: 'topic', title: 'Jembatan Ampera, Sumatera Selatan', desc: 'Ambil Kartu Jembatan Ampera', theme: 'yellow-bright', bg: '/island/jembatanAmpera.png' },
-  { id: 5, type: 'corner', title: 'Candi Prambanan', desc: 'Ambil Kartu Candi Prambanan', theme: 'purple', bg: '/island/candiPrambanan.png' }, // Sudut Kanan Atas
+  { id: 5, type: 'topic', title: 'Candi Prambanan', desc: 'Ambil Kartu Candi Prambanan', theme: 'purple', bg: '/island/candiPrambanan.png' }, // Sudut Kanan Atas
   { id: 6, type: 'topic', title: 'Gunung Bromo, Jawa Timur', desc: 'Ambil Kartu Gunung Bromo', theme: 'yellow', bg: '/island/gunungBromo.png' },
-  { id: 7, type: 'corner', title: 'Uluwatu, Bali', desc: 'Ambil Kartu Uluwatu', theme: 'sky', bg: '/island/uluwatu.png' },
+  { id: 7, type: 'topic', title: 'Uluwatu, Bali', desc: 'Ambil Kartu Uluwatu', theme: 'sky', bg: '/island/uluwatu.png' },
   { id: 8, type: 'topic', title: 'Desa Sade, Pulau Lombok', desc: 'Ambil Kartu Desa Sade', theme: 'pink', bg: '/island/desaSade.png' },
   { id: 9, type: 'chance', title: '🔙 Mundur 🔙', desc: 'Kocok kembali dadu, lalu mundur sejumlah dadu.', theme: 'red', bg: 'none' },
   { id: 10, type: 'corner', title: '🅿️ PARKIR BEBAS 🅿️', desc: 'Aman dari tugas', theme: 'gray', bg: 'none' }, // Sudut Kanan Bawah
@@ -20,9 +20,9 @@ const defaultBoard = [
   { id: 14, type: 'topic', title: 'Monumen Khatulistiwa, Kalimantan Barat', desc: 'Ambil Kartu Monumen Khatulistiwa', theme: 'yellow-bright', bg: '/island/monumenKhatulistiwa.png' },
   { id: 15, type: 'corner', title: '🔙 Mundur 🔙', desc: 'Kocok kembali dadu, lalu mundur sejumlah dadu.', theme: 'red', bg: 'none' }, // Sudut Kiri Bawah
   { id: 16, type: 'topic', title: 'Tana Toraja, Sulawesi Selatan', desc: 'Ambil Kartu Tana Toraja', theme: 'yellow', bg: '/island/tanaToraja.png' },
-  { id: 17, type: 'corner', title: 'Pulau Wakatobi, Sulawesi Tenggara', desc: 'Ambil Kartu Pulau Wakatobi', theme: 'purple', bg: '/island/pulauWakatobi.png' },
+  { id: 17, type: 'topic', title: 'Pulau Wakatobi, Sulawesi Tenggara', desc: 'Ambil Kartu Pulau Wakatobi', theme: 'purple', bg: '/island/pulauWakatobi.png' },
   { id: 18, type: 'topic', title: 'Raja Ampat, Papua Barat Daya', desc: 'Ambil Kartu Raja Ampat', theme: 'pink', bg: '/island/rajaAmpat.png' },
-  { id: 19, type: 'corner', title: 'Pegunungan Arfak, Papua Barat', desc: 'Ambil Kartu Pegunungan Arfak', theme: 'purple', bg: '/island/pegununganArfak.png' },
+  { id: 19, type: 'topic', title: 'Pegunungan Arfak, Papua Barat', desc: 'Ambil Kartu Pegunungan Arfak', theme: 'purple', bg: '/island/pegununganArfak.png' },
 ];
 
 const playerColors = ['bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500', 'bg-orange-500'];
@@ -117,6 +117,7 @@ const defaultQuestionSets = [
 export const useGameStore = create(
   persist(
     (set) => ({
+      board: defaultBoard,
       sessions: [], 
       activeSessionId: null, 
       questionSets: defaultQuestionSets, 

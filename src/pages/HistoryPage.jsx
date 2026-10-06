@@ -1,11 +1,15 @@
 import { useGameStore } from "../store/useGameStore";
+import { useNavigate } from "react-router-dom";
+import BackButton from "../components/UI/BackButton";
 
 export default function HistoryPage({ onNavigate }) {
   const { sessions, resumeSession } = useGameStore();
+  const navigate = useNavigate();
 
   const handleResume = (id) => {
     resumeSession(id);
     onNavigate("board");
+    navigate("/board");
   };
 
   return (
@@ -15,12 +19,7 @@ export default function HistoryPage({ onNavigate }) {
           <h1 className="text-3xl font-extrabold text-slate-800">
             Riwayat Permainan
           </h1>
-          <button
-            onClick={() => onNavigate("home")}
-            className="bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-lg font-bold text-slate-700"
-          >
-            Kembali
-          </button>
+          <BackButton onClick={() => onNavigate("home")} />
         </div>
 
         {sessions.length === 0 ? (

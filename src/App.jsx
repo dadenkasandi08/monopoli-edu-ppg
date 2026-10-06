@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import AboutPage from "./pages/AboutPage";
 import BoardPage from "./pages/BoardPage";
@@ -13,16 +14,32 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
 
   return (
-    <>
-      {currentPage === "home" && <HomePage onNavigate={setCurrentPage} />}
-      {currentPage === "start" && <StartPage onNavigate={setCurrentPage} />}
-      {currentPage === "history" && <HistoryPage onNavigate={setCurrentPage} />}
-      {currentPage === "board" && <BoardPage onNavigate={setCurrentPage} />}
-      {currentPage === "about" && <AboutPage onNavigate={setCurrentPage} />}
-      {currentPage === "manual" && <ManualPage onNavigate={setCurrentPage} />}
-      {currentPage === "bank-soal" && (
-        <QuestionBankPage onNavigate={setCurrentPage} />
-      )}
-    </>
+    <Routes>
+      <Route path="/" element={<HomePage onNavigate={setCurrentPage} />} />
+      <Route
+        path="/start"
+        element={<StartPage onNavigate={setCurrentPage} />}
+      />
+      <Route
+        path="/history"
+        element={<HistoryPage onNavigate={setCurrentPage} />}
+      />
+      <Route
+        path="/board"
+        element={<BoardPage onNavigate={setCurrentPage} />}
+      />
+      <Route
+        path="/about"
+        element={<AboutPage onNavigate={setCurrentPage} />}
+      />
+      <Route
+        path="/manual"
+        element={<ManualPage onNavigate={setCurrentPage} />}
+      />
+      <Route
+        path="/bank-soal"
+        element={<QuestionBankPage onNavigate={setCurrentPage} />}
+      />
+    </Routes>
   );
 }

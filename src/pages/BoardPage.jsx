@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useGameStore } from "../store/useGameStore";
+import { motion } from "framer-motion";
+import BackButton from "../components/UI/BackButton";
+import { useNavigate } from "react-router-dom";
 
 const getThemeColor = (theme) => {
   switch (theme) {
@@ -23,12 +26,14 @@ const getThemeColor = (theme) => {
 };
 
 export default function BoardPage({ onNavigate }) {
+  const navigate = useNavigate();
   // 1. Ambil state global
   const sessions = useGameStore((state) => state.sessions);
   const activeSessionId = useGameStore((state) => state.activeSessionId);
   const movePlayer = useGameStore((state) => state.movePlayer);
   const nextTurn = useGameStore((state) => state.nextTurn);
 
+  const moveSoundRef = useRef(null);
   // 2. Cari sesi aktif saat ini
   const activeSession = sessions.find((s) => s.id === activeSessionId);
 
@@ -38,12 +43,27 @@ export default function BoardPage({ onNavigate }) {
   // Jika tidak ada sesi aktif, otomatis kembali ke beranda
   if (!activeSession) {
     onNavigate("home");
+    navigate("/"); // Tambahkan ini untuk navigasi
     return null;
   }
 
   // 3. Deklarasikan variabel dari sesi aktif
   const { players, board, turnIndex } = activeSession;
   const currentPlayer = players[turnIndex];
+
+  useEffect(() => {
+    moveSoundRef.current = new Audio("/step.mp3");
+  }, []);
+
+  // Fungsi untuk memutar suara langkah
+  const playMoveSound = () => {
+    if (moveSoundRef.current) {
+      moveSoundRef.current.currentTime = 0; // Reset suara ke detik ke-0 agar bisa diputar cepat berurutan
+      moveSoundRef.current
+        .play()
+        .catch((err) => console.warn("Audio tertunda:", err));
+    }
+  };
 
   const rollDice = () => {
     if (isRolling) return;
@@ -57,11 +77,24 @@ export default function BoardPage({ onNavigate }) {
         clearInterval(interval);
         const finalSteps = Math.floor(Math.random() * 6) + 1;
         setDiceResult(finalSteps);
-        movePlayer(finalSteps);
-        setIsRolling(false);
-        setTimeout(() => {
-          nextTurn();
-        }, 1200);
+
+        // --- AWAL MODIFIKASI ANIMASI BERJALAN ---
+        let currentStep = 0;
+        const stepInterval = setInterval(() => {
+          currentStep++;
+          movePlayer(1); // Pindahkan bidak 1 langkah
+
+          playMoveSound(); // Putar suara langkah
+          // Hentikan interval jika bidak sudah mencapai tujuan akhir
+          if (currentStep >= finalSteps) {
+            clearInterval(stepInterval);
+            setIsRolling(false);
+            setTimeout(() => {
+              nextTurn();
+            }, 1200); // Jeda sebelum giliran berpindah
+          }
+        }, 350); // Kecepatan perpindahan antar blok (350ms)
+        // --- AKHIR MODIFIKASI ANIMASI BERJALAN ---
       }
     }, 80);
   };
@@ -91,6 +124,7 @@ export default function BoardPage({ onNavigate }) {
 
   return (
     <div className="min-h-screen bg-slate-100 p-4 flex flex-col items-center justify-center">
+      <BackButton />
       <h1 className="text-3xl font-extrabold text-slate-800 mb-1">
         Monopoli Edu
       </h1>
@@ -115,7 +149,7 @@ export default function BoardPage({ onNavigate }) {
             <div
               key={block.id}
               style={blockStyle}
-              className={`${colorClass}/20 relative p-1.5 bg-cover bg-center rounded-md border-2 border-dashed border-slate-700 flex flex-col justify-center items-center text-center shadow-sm overflow-hidden`}
+              className={`${colorClass}/20 relative p-1.5 bg-cover bg-center rounded-md border-2 border-dashed border-slate-700 flex flex-col justify-center items-center text-center shadow-sm`}
             >
               {block.bg !== "none" && (
                 <div className="absolute inset-0 bg-white/50 z-0"></div>
@@ -137,13 +171,20 @@ export default function BoardPage({ onNavigate }) {
                 {players.map((p) => {
                   if (p.position === block.id) {
                     return (
-                      <div
+                      <motion.div
                         key={p.id}
-                        className={`w-10 h-10 rounded-full ${p.color} border-2 border-white shadow-md flex items-center justify-center text-md text-white font-extrabold`}
+                        layoutId={`player-token-${p.id}`} // Properti kunci agar elemen berpindah secara mulus antar DOM
+                        transition={{
+                          type: "spring",
+                          stiffness: 250,
+                          damping: 25,
+                          mass: 1,
+                        }}
+                        className={`w-10 h-10 rounded-full ${p.color} border-2 border-white shadow-md flex items-center justify-center text-md text-white font-extrabold relative z-50`}
                         title={p.name}
                       >
                         {p.name.charAt(0)}
-                      </div>
+                      </motion.div>
                     );
                   }
                   return null;
@@ -173,7 +214,7 @@ export default function BoardPage({ onNavigate }) {
 
           <div className="my-2 flex flex-col items-center">
             <div className="w-14 h-14 bg-white border-2 border-slate-800 rounded-xl shadow-md flex items-center justify-center text-2xl font-extrabold text-slate-800 mb-2 transition-transform transform hover:scale-105">
-              {diceResult !== null ? diceResult : "🎲"}
+              {diceResult !== null ? diceResult : "?"}
             </div>
             <button
               onClick={rollDice}

@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { useGameStore } from "../store/useGameStore";
 
+const themePrintColors = {
+  green: "#dcfce7", // Hijau pastel
+  yellow: "#fef9c3", // Kuning pastel
+  sky: "#e0f2fe", // Biru langit pastel
+  "yellow-bright": "#fef08a", // Kuning terang pastel
+  purple: "#f3e8ff", // Ungu pastel
+  pink: "#fce7f3", // Merah muda pastel
+  default: "#ffffff", // Putih
+};
+
 export default function QuestionBankPage({ onNavigate }) {
-  const { questionSets, saveQuestionSet, deleteQuestionSet, sessions } =
+  const { questionSets, saveQuestionSet, deleteQuestionSet, sessions, board } =
     useGameStore();
 
   // Ambil data pulau (hanya yang bertipe 'topic')
-  const defaultBoard =
-    sessions.length > 0 ? sessions[0].board : useGameStore.getState().board;
+  const defaultBoard = sessions.length > 0 ? sessions[0].board : board;
   const topicIslands = defaultBoard
     ? defaultBoard.filter((b) => b.type === "topic")
     : [];
@@ -238,7 +247,8 @@ export default function QuestionBankPage({ onNavigate }) {
               const islandQs = questions[island.id] || [];
               // Saring hanya pertanyaan yang teks-nya diisi (tidak kosong)
               const filledQs = islandQs.filter((q) => q.trim() !== "");
-
+              const cardBgColor =
+                themePrintColors[island.theme] || themePrintColors.default;
               // Jika pulau ini sama sekali tidak diisi soal, cetak 1 kartu kosong sebagai penanda
               if (filledQs.length === 0) {
                 return (
@@ -266,6 +276,12 @@ export default function QuestionBankPage({ onNavigate }) {
                 <div
                   key={`${island.id}-${idx}`}
                   className="border-2 border-dashed border-black p-3 break-inside-avoid min-h-[50mm] flex flex-col justify-center items-center text-center relative"
+                  // TAMBAHKAN PROPERTI STYLE DI SINI
+                  style={{
+                    backgroundColor: cardBgColor,
+                    WebkitPrintColorAdjust: "exact", // Memaksa browser cetak warna background
+                    printColorAdjust: "exact",
+                  }}
                 >
                   {/* Label Atas Kartu */}
                   <div className="absolute top-2 left-0 w-full flex justify-between px-2">

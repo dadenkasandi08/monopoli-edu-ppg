@@ -4,10 +4,14 @@ import imgPetunjuk from "../assets/petunjuk.png";
 import imgStart from "../assets/start.png";
 import imgAbout from "../assets/about.png";
 import imgBankSoal from "../assets/bank_soal.png";
+import { useNavigate } from "react-router-dom";
 
 function HomePage({ onNavigate }) {
+  const navigate = useNavigate();
+
   const handleNavigate = (page) => {
     onNavigate(page);
+    navigate(`/${page}`);
   };
 
   return (
