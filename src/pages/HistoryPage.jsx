@@ -1,6 +1,8 @@
 import { useGameStore } from "../store/useGameStore";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import BackButton from "../components/UI/BackButton";
+import imgLogo from "../assets/logo.png";
 
 export default function HistoryPage({ onNavigate }) {
   const { sessions, resumeSession } = useGameStore();
@@ -12,14 +14,29 @@ export default function HistoryPage({ onNavigate }) {
     navigate("/board");
   };
 
+  const handleBack = () => {
+    onNavigate("home");
+    navigate("/");
+  };
+
   return (
-    <div className="min-h-screen bg-[url('/background.png')] bg-black/50 bg-blend-overlay bg-cover bg-center p-8 flex flex-col items-center">
-      <div className="w-full max-w-3xl bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 md:p-10 min-h-[70vh]">
+    <div className="min-h-screen bg-slate-50 bg-[url('/src/assets/background.jpg')] bg-cover bg-center flex flex-col items-center justify-center p-4">
+      <div className="text-center mb-12">
+        <motion.button
+          animate={{ scale: [1.5, 1.6, 1.5] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="drop-shadow-md hover:drop-shadow-xl"
+          onClick={handleBack}
+        >
+          <img src={imgLogo} alt="Logo" className="w-48 md:w-56 h-auto" />
+        </motion.button>
+      </div>
+      <div className="w-full max-w-3xl bg-white/60 backdrop-blur-sm rounded-3xl shadow-2xl p-6 md:p-10 min-h-[70vh]">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-extrabold text-slate-800">
             Riwayat Permainan
           </h1>
-          <BackButton onClick={() => onNavigate("home")} />
+          <BackButton />
         </div>
 
         {sessions.length === 0 ? (

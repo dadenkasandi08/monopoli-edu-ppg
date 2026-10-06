@@ -9,11 +9,11 @@ const defaultBoard = [
   { id: 3, type: 'topic', title: 'Pulau Natuna, Kepulauan Riau', desc: 'Ambil Kartu Pulau Natuna', theme: 'sky', bg: '/island/pulauNatuna.png' },
   { id: 4, type: 'topic', title: 'Jembatan Ampera, Sumatera Selatan', desc: 'Ambil Kartu Jembatan Ampera', theme: 'yellow-bright', bg: '/island/jembatanAmpera.png' },
   { id: 5, type: 'topic', title: 'Candi Prambanan', desc: 'Ambil Kartu Candi Prambanan', theme: 'purple', bg: '/island/candiPrambanan.png' }, // Sudut Kanan Atas
-  { id: 6, type: 'topic', title: 'Gunung Bromo, Jawa Timur', desc: 'Ambil Kartu Gunung Bromo', theme: 'yellow', bg: '/island/gunungBromo.png' },
+  { id: 6, type: 'chance', title: '🔙 Mundur 🔙', desc: 'Kocok kembali dadu, lalu mundur sejumlah dadu.', theme: 'red', bg: 'none' },
   { id: 7, type: 'topic', title: 'Uluwatu, Bali', desc: 'Ambil Kartu Uluwatu', theme: 'sky', bg: '/island/uluwatu.png' },
   { id: 8, type: 'topic', title: 'Desa Sade, Pulau Lombok', desc: 'Ambil Kartu Desa Sade', theme: 'pink', bg: '/island/desaSade.png' },
-  { id: 9, type: 'chance', title: '🔙 Mundur 🔙', desc: 'Kocok kembali dadu, lalu mundur sejumlah dadu.', theme: 'red', bg: 'none' },
-  { id: 10, type: 'corner', title: '🅿️ PARKIR BEBAS 🅿️', desc: 'Aman dari tugas', theme: 'gray', bg: 'none' }, // Sudut Kanan Bawah
+  { id: 9, type: 'topic', title: 'Gunung Bromo, Jawa Timur', desc: 'Ambil Kartu Gunung Bromo', theme: 'yellow', bg: '/island/gunungBromo.png' },
+  { id: 10, type: 'corner', title: '🅿️ PARKIR BEBAS 🅿️️', desc: 'Aman dari tugas', theme: 'gray', bg: 'none' }, // Sudut Kanan Bawah
   { id: 11, type: 'topic', title: 'Pulau Moyo, Sumbawa', desc: 'Ambil Kartu Pulau Moyo', theme: 'green', bg: '/island/pulauMoyo.png' },
   { id: 12, type: 'topic', title: 'Labuan Bajo, NTT', desc: 'Ambil Kartu Labuan Bajo', theme: 'yellow', bg: '/island/labuanBajo.png' },
   { id: 13, type: 'topic', title: 'Pulau Derawan, Kalimantan Timur', desc: 'Ambil Kartu Pulau Derawan', theme: 'sky', bg: '/island/pulauDerawan.png' },
@@ -47,6 +47,13 @@ const defaultQuestionSets = [
         "Bacalah: “Pengenalan pola adalah proses menemukan kesamaan atau pola dalam suatu masalah.” Kemudian berikan satu contoh. (Poin: 2)",
         "Setiap kali hujan deras, halaman sekolah menjadi tergenang. Pola apa yang kamu temukan? (Poin: 2)"
       ],
+      3: [ // Pulau Natuna
+        "Sistem MPLS berjalan kacau karena banyak kegiatan yang bentrok. Pilihlah sub-tugas yang tepat: Menyusun jadwal harian MOS, Membeli seragam baru panitia, Membentuk koordinator tiap kelompok siswa baru, Menyiapkan materi pengenalan sekolah, Mengecat ulang gerbang sekolah, Menentukan titik kumpul dan denah lokasi.",
+        "Budi mengeluh PR menumpuk di akhir pekan. Ia menguraikan sub-masalah penyebabnya: tidak ada jadwal belajar rutin, tidak mencatat deadline tugas, dan tugas dikerjakan mendadak. Budi menerapkan konsep .....",
+        "Dalam data peminjaman perpustakaan, guru menemukan bahwa buku tentang teknologi paling sering dipinjam pada hari Jumat. Kemampuan menemukan kecenderungan tersebut disebut apa?",
+        "Manakah situasi berikut yang termasuk contoh pengenalan pola? Siswa membawa bekal jarang jajan, Membagi tugas panitia perpisahan, Antrean kantin selalu panjang pada jam istirahat kedua, atau Nilai olahraga siswa naik setelah rutin ekskul?",
+        "Saat membuat denah sekolah untuk siswa baru, hal yang perlu ditonjolkan adalah: Letak ruang kelas/kantin/toilet/gerbang, Warna cat, Nama pohon, atau Jumlah lampu?"
+      ],
       4: [ // Jembatan Ampera
         "Apa yang dimaksud dengan abstraksi dalam berpikir komputasional? (Poin: 2)",
         "Kamu ingin mencari lokasi sebuah kelas di sekolah. Informasi apa yang penting untuk kamu ketahui? (Poin: 2)",
@@ -54,12 +61,26 @@ const defaultQuestionSets = [
         "Bacalah dengan jelas: “Abstraksi adalah memilih informasi yang penting dan mengabaikan informasi yang tidak diperlukan.” (Poin: 2)",
         "Pilih satu masalah sehari-hari. Tentukan 3 informasi penting yang diperlukan untuk menyelesaikan masalah tersebut. (Poin: 2)"
       ],
+      5: [ // Candi Prambanan
+        "Saat membuat kartu pelajar, informasi mana saja yang perlu dicantumkan: Nama siswa, NISN, Makanan favorit siswa, Foto siswa?",
+        "Urutkan langkah berikut menjadi urutan upacara yang benar: Pembina upacara memberi amanat, Petugas mengibarkan bendera, Peserta menyanyikan lagu Indonesia Raya, Peserta berbaris rapi di lapangan, Upacara ditutup doa.",
+        "Untuk mengeprint tugas, siswa memilih dokumen, memilih menu cetak, menentukan jumlah halaman, lalu menekan tombol print. Langkah-langkah tersebut merupakan penerapan konsep berpikir komputasional .....",
+        "Koperasi siswa mengalami kerugian. Pilih 4 penyebab untuk diselidiki: Pencatatan kas tidak konsisten, Warna seragam petugas, Barang kadaluarsa tidak terjual, Harga beli naik, Jadwal piket, atau Barang hilang tanpa tercatat?",
+        "Koneksi Wi-Fi lambat. Penyebabnya adalah jumlah perangkat terhubung, kapasitas bandwidth, dan router usang. Hal tersebut merupakan penerapan konsep ..... dalam berpikir komputasional."
+      ],
       6: [ // Gunung Bromo
         "Apa yang dimaksud dengan algoritma dalam berpikir komputasional? (Poin: 2)",
         "Sebutkan langkah-langkah membuat mi instan secara berurutan. (Poin: 2)",
         "Buat algoritma sederhana untuk mengirim tugas melalui WhatsApp (Poin: 2)",
         "Bacalah: “Algoritma adalah langkah-langkah yang sistematis dan berurutan untuk menyelesaikan masalah.” Berikan satu contoh algoritma. (Poin: 2)",
         "Susun dengan benar: Buka aplikasi → Nyalakan komputer → Login → Pilih dokumen. (Poin: 2)"
+      ],
+      7: [ // Uluwatu, Bali
+        "Jika setiap hari hujan deras halaman sekolah tergenang air, konsep berpikir komputasional apa yang digunakan untuk menemukan hubungan tersebut?",
+        "Manakah situasi berikut yang termasuk contoh pengenalan pola? Nilai kebugaran siswa ekskul basket tinggi, Kemacetan gerbang terjadi pukul 06.30–06.45, Membagi tugas panitia, atau Buku fiksi sering dipinjam menjelang akhir semester?",
+        "Saat membuat aplikasi jadwal pelajaran, informasi manakah yang penting ditampilkan: Nama mata pelajaran, Jam pelajaran, Warna baju guru, atau Nama guru pengajar?",
+        "Saat membuat denah evakuasi bencana yang ditempel di kelas, dua informasi penting yang wajib ada adalah titik kumpul dan jalur keluar/evakuasi terdekat. Hal ini merupakan penerapan konsep .....",
+        "Urutkan prosedur menyalakan proyektor: Hubungkan kabel HDMI ke laptop, Colokkan proyektor ke stop kontak, Tekan tombol power proyektor, Atur fokus dan posisi layar."
       ],
       8: [ // Desa Sade
         "Kelompokmu mendapat tugas besar dengan waktu terbatas. Gunakan minimal 2 konsep berpikir komputasional untuk menyelesaikannya. (Poin: 3)",
@@ -103,12 +124,26 @@ const defaultQuestionSets = [
         "Sebutkan 5 informasi tentang suatu kegiatan kepada temanmu. Temanmu harus memilih informasi yang paling penting. (Poin: 2)",
         "Berikan satu contoh abstraksi yang kamu gunakan ketika menggunakan HP atau komputer. (Poin: 2)"
       ],
+      17: [ // Pulau Wakatobi
+        "Petugas piket membersihkan kelas mulai dari menyiapkan alat kebersihan, menyapu, menghapus papan tulis, hingga merapikan meja. Rangkaian langkah ini merupakan penerapan konsep berpikir komputasional .....",
+        "Bazar OSIS sepi pengunjung. Pilih hal yang layak diselidiki: Promosi kurang gencar, Warna spanduk, Waktu pelaksanaan bertepatan hari ujian, Jumlah stan sedikit, Nama panitia, atau Harga tiket mahal?",
+        "Presentasi kelompok berantakan karena pembagian tugas tidak jelas, tidak ada latihan bersama, dan ada anggota tidak hadir. Ini contoh penerapan konsep apa dalam berpikir komputasional?",
+        "Manakah pernyataan yang menunjukkan pengenalan pola? Siswa bersepeda selalu datang lebih pagi, Sampah plastik terbanyak setiap Jumat, Membuat denah sekolah, atau Partisipasi lomba tinggi jika hadiah voucher makanan?",
+        "Guru piket memperhatikan siswa yang membawa sepeda motor selalu datang lebih pagi dibanding yang naik angkutan umum. Guru piket menerapkan konsep ....."
+      ],
       18: [ // Raja Ampat
         "Perhatikan algoritma berikut: Masukkan bumbu → Rebus air → Masukkan mi → Sajikan. Apa kesalahannya? (Poin: 2)",
         "“Urutan langkah tidak penting dalam algoritma.” Benar atau salah? Jelaskan. (Poin: 2)",
         "Pilih satu teman. Jelaskan langkah-langkah suatu kegiatan tanpa menyebut nama kegiatannya. Temanmu harus menebaknya. (Poin: 2)",
         "Sebutkan 4 kegiatan dalam kehidupan sehari-hari yang dapat dibuat menjadi algoritma. (Poin: 2)",
         "Buat algoritma sederhana agar kamu tidak terlambat masuk sekolah. (Poin: 2)"
+      ],
+      19: [ // Pegunungan Arfak
+        "Saat membuat formulir pendaftaran ekstrakurikuler baru, informasi manakah yang penting untuk diminta dari siswa: Nama lengkap, Kelas, Hewan peliharaan, atau Pilihan ekstrakurikuler?",
+        "Saat membuat kartu pelajar, informasi penting yang perlu dicantumkan adalah nama, kelas, NISN, dan foto siswa. Hal ini telah menerapkan konsep berpikir komputasional .....",
+        "Urutkan prosedur peminjaman buku yang benar: Siswa memilih buku, Petugas mencatat data peminjaman, Siswa menunjukkan kartu anggota, Siswa membawa buku pulang.",
+        "Sebelum menggunakan komputer di lab, Sinta menekan tombol power, menunggu komputer menyala, lalu membuka aplikasi. Langkah-langkah tersebut merupakan penerapan konsep berpikir komputasional .....",
+        "Acara perpisahan molor 2 jam. Pilihlah 3 penyebab masalah tersebut: MC tidak mengatur waktu, Warna dekorasi kurang menarik, Sound system bermasalah, Tamu datang awal, atau Sesi foto tidak dibatasi waktu?"
       ]
     }
   }
@@ -188,6 +223,23 @@ export const useGameStore = create(
           ...session, 
           turnIndex: (session.turnIndex + 1) % session.players.length 
         };
+
+        return { sessions: updatedSessions };
+      }),
+
+       updatePlayerPoints: (pointsToAdd) => set((state) => {
+        const sessionIndex = state.sessions.findIndex(s => s.id === state.activeSessionId);
+        if (sessionIndex === -1) return state;
+
+        const session = state.sessions[sessionIndex];
+        
+        // Update poin pada pemain yang sedang mendapat giliran
+        const updatedPlayers = session.players.map((p, index) => 
+          index === session.turnIndex ? { ...p, points: (p.points || 0) + pointsToAdd } : p
+        );
+
+        const updatedSessions = [...state.sessions];
+        updatedSessions[sessionIndex] = { ...session, players: updatedPlayers, date: new Date().toISOString() };
 
         return { sessions: updatedSessions };
       }),

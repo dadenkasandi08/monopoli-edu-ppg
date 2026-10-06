@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import imgHistory from "../assets/history.png";
-import imgPetunjuk from "../assets/petunjuk.png";
-import imgStart from "../assets/start.png";
-import imgAbout from "../assets/about.png";
-import imgBankSoal from "../assets/bank_soal.png";
+import imgHistory from "../assets/history_button.png";
+import imgPetunjuk from "../assets/petunjuk_permainan_button.png";
+import imgStart from "../assets/new_game2.png";
+import imgLogo from "../assets/logo.png";
+import imgAbout from "../assets/tentang_kami_button.png";
+import imgBankSoal from "../assets/bank_soal_button.png";
 import { useNavigate } from "react-router-dom";
 
 function HomePage({ onNavigate }) {
@@ -15,13 +16,17 @@ function HomePage({ onNavigate }) {
   };
 
   return (
-    // <div className="min-h-screen bg-[url('/src/assets/background.png')] bg-black/20 bg-blend-overlay bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center p-4">
-    <div className="min-h-screen bg-stone-400 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-[url('/src/assets/background.jpg')] bg-black/30 bg-blend-overlay bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center p-4">
       {/* Judul Halaman */}
       <div className="text-center mb-12">
-        <h1 className="text-7xl md:text-6xl font-extrabold text-white drop-shadow-xl mb-4">
-          Monopoli Edu
-        </h1>
+        <motion.button
+          animate={{ scale: [1.3, 1.4, 1.3] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="drop-shadow-md hover:drop-shadow-xl"
+          onClick={() => handleNavigate("/")}
+        >
+          <img src={imgLogo} alt="Logo" className="w-48 md:w-56 h-auto" />
+        </motion.button>
       </div>
 
       {/* Container untuk 5 Tombol Gambar - Gap diperlebar agar tidak saling bertabrakan */}
@@ -29,10 +34,10 @@ function HomePage({ onNavigate }) {
         {/* Baris 1: History & Manual (2 Tombol) */}
         <div className="flex justify-between gap-10 w-full">
           <motion.button
-            animate={{ scale: [1.5, 1.6, 1.5] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+            animate={{ scale: [1.3, 1.4, 1.3] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            whileHover={{ scale: 1.6 }}
-            whileTap={{ scale: 1.6 }}
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 1.3 }}
             className="drop-shadow-md hover:drop-shadow-xl"
             onClick={() => handleNavigate("history")}
           >
@@ -45,10 +50,10 @@ function HomePage({ onNavigate }) {
           </motion.button>
 
           <motion.button
-            animate={{ scale: [1.5, 1.6, 1.5] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+            animate={{ scale: [1.3, 1.4, 1.3] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            whileHover={{ scale: 1.6 }}
-            whileTap={{ scale: 1.6 }}
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 1.3 }}
             className="drop-shadow-md hover:drop-shadow-xl"
             onClick={() => handleNavigate("manual")}
           >
@@ -63,10 +68,10 @@ function HomePage({ onNavigate }) {
         {/* Baris 2: New Game (Tombol Tengah dengan Efek Detak Jantung) */}
         <div className="flex justify-center w-full z-10">
           <motion.button
-            animate={{ scale: [2, 2.2, 2] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+            animate={{ scale: [1.5, 1.6, 1.5] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
             transition={{ repeat: Infinity, duration: 1, ease: "easeInOut" }}
-            whileHover={{ scale: 2.2 }}
-            whileTap={{ scale: 1.95 }}
+            whileHover={{ scale: 1.5 }}
+            whileTap={{ scale: 1.5 }}
             className="drop-shadow-xl hover:drop-shadow-2xl"
             onClick={() => handleNavigate("start")}
           >
@@ -82,10 +87,10 @@ function HomePage({ onNavigate }) {
         {/* Baris 3: About & Daftar Soal (2 Tombol) */}
         <div className="flex justify-between gap-10 w-full">
           <motion.button
-            animate={{ scale: [1.5, 1.6, 1.5] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+            animate={{ scale: [1.3, 1.4, 1.3] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            whileHover={{ scale: 1.6 }}
-            whileTap={{ scale: 1.6 }}
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 1.3 }}
             className="drop-shadow-md hover:drop-shadow-xl"
             onClick={() => handleNavigate("about")}
           >
@@ -94,10 +99,10 @@ function HomePage({ onNavigate }) {
           </motion.button>
 
           <motion.button
-            animate={{ scale: [1.5, 1.6, 1.5] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+            animate={{ scale: [1.3, 1.4, 1.3] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            whileHover={{ scale: 1.6 }}
-            whileTap={{ scale: 1.6 }}
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 1.3 }}
             className="drop-shadow-md hover:drop-shadow-xl"
             onClick={() => handleNavigate("bank-soal")}
           >

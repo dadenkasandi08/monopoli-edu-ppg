@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { useGameStore } from "../store/useGameStore";
+import { motion } from "framer-motion";
+import imgLogo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+
+import BackButton from "../components/UI/BackButton";
 
 const themePrintColors = {
   green: "#dcfce7", // Hijau pastel
@@ -14,6 +19,7 @@ const themePrintColors = {
 export default function QuestionBankPage({ onNavigate }) {
   const { questionSets, saveQuestionSet, deleteQuestionSet, sessions, board } =
     useGameStore();
+  const navigate = useNavigate();
 
   // Ambil data pulau (hanya yang bertipe 'topic')
   const defaultBoard = sessions.length > 0 ? sessions[0].board : board;
@@ -69,24 +75,31 @@ export default function QuestionBankPage({ onNavigate }) {
       setView("list");
     }, 500);
   };
+  const handleCancel = () => {
+    onNavigate("home");
+    navigate("/"); // Navigasi ke halaman beranda
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 bg-[url('/src/assets/background.jpg')] bg-cover bg-center flex flex-col items-center justify-center p-4">
       {/* ---------------- MODE DAFTAR / FORM (Sembunyi saat Print) ---------------- */}
+      <div className="text-center mb-12">
+        <motion.button
+          animate={{ scale: [1.5, 1.6, 1.5] }} // Skala detak disesuaikan sedikit karena tombolnya sudah besar
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="drop-shadow-md hover:drop-shadow-xl"
+          onClick={handleCancel}
+        >
+          <img src={imgLogo} alt="Logo" className="w-48 md:w-56 h-auto" />
+        </motion.button>
+      </div>
       <div className="print:hidden p-4 md:p-8 flex flex-col items-center">
-        <div className="w-full max-w-5xl bg-white rounded-2xl shadow-xl p-6 md:p-10">
+        <div className="w-full max-w-5xl bg-white/60 backdrop-blur-sm p-8 rounded-2xl shadow-2xl md:p-10">
           <div className="flex justify-between items-center mb-8 border-b pb-4">
             <h1 className="text-3xl font-extrabold text-slate-800">
               {view === "form" ? "Editor Set Soal" : "Bank Soal Guru"}
             </h1>
-            <button
-              onClick={() =>
-                view === "form" ? setView("list") : onNavigate("home")
-              }
-              className="bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-lg font-bold text-slate-700"
-            >
-              Kembali
-            </button>
+            <BackButton />
           </div>
 
           {/* VIEW: LIST */}
