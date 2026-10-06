@@ -6,7 +6,7 @@ import HistoryPage from "./pages/HistoryPage";
 import HomePage from "./pages/HomePage";
 import ManualPage from "./pages/ManualPage";
 import StartPage from "./pages/StartPage";
-import TambahSoalPage from "./pages/TambahSoalPage";
+import QuestionBankPage from "./pages/TambahSoalPage";
 
 export default function App() {
   // State untuk melacak halaman mana yang sedang dibuka (home, start, history, board)
@@ -21,7 +21,7 @@ export default function App() {
       {currentPage === "about" && <AboutPage onNavigate={setCurrentPage} />}
       {currentPage === "manual" && <ManualPage onNavigate={setCurrentPage} />}
       {currentPage === "bank-soal" && (
-        <TambahSoalPage onNavigate={setCurrentPage} />
+        <QuestionBankPage onNavigate={setCurrentPage} />
       )}
     </>
   );
