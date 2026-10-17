@@ -10,6 +10,7 @@ export default function StartPage({ onNavigate }) {
 
   const [sessionName, setSessionName] = useState("");
   const [numPlayers, setNumPlayers] = useState(2);
+  const [timerDuration, setTimerDuration] = useState(45);
   const [playerNames, setPlayerNames] = useState(["", ""]);
 
   // Handle perubahan jumlah pemain
@@ -36,7 +37,7 @@ export default function StartPage({ onNavigate }) {
   const handleStart = (e) => {
     e.preventDefault();
     if (!sessionName) return alert("Silakan isi nama sesi/kelas!");
-    createSession(sessionName, playerNames);
+    createSession(sessionName, playerNames, Number(timerDuration));
     onNavigate("board"); // Pindah ke halaman papan
     navigate("/board"); // Navigasi ke halaman papan
   };
@@ -94,6 +95,26 @@ export default function StartPage({ onNavigate }) {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-slate-700 mb-1">
+                Waktu Menjawab Setiap Soal
+              </label>
+              <select
+                value={timerDuration}
+                onChange={(e) => setTimerDuration(Number(e.target.value))}
+                className="w-full p-2 border-2 border-slate-300 rounded-lg outline-none focus:border-indigo-500"
+              >
+                {[15, 30, 45, 60, 90, 120].map((seconds) => (
+                  <option key={seconds} value={seconds}>
+                    {seconds} detik
+                  </option>
+                ))}
+              </select>
+              <p className="text-xs text-slate-600 mt-1">
+                Timer ini digunakan kembali setiap kali pemain mendapat soal.
+              </p>
             </div>
 
             <div className="space-y-2 mt-2">
